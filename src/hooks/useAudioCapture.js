@@ -16,11 +16,6 @@ function downsampleAndEncode(float32Buffer, inputSampleRate) {
   return pcm16.buffer;
 }
 
-/**
- * Captures microphone audio and delivers 16kHz mono PCM16 chunks via
- * onChunk(ArrayBuffer). Uses a ScriptProcessorNode for broad browser
- * compatibility (works without bundling a separate AudioWorklet module).
- */
 export function useAudioCapture() {
   const audioContextRef = useRef(null);
   const processorRef = useRef(null);
