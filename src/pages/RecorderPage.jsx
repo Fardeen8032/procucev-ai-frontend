@@ -36,7 +36,7 @@ export default function RecorderPage() {
     socket.emit('session:start');
 
     try {
-      const response = await start((chunk) => {
+      await start((chunk) => {
         socket.emit('audio:chunk', chunk);
       });
       setIsRecording(true);

@@ -2,7 +2,6 @@ import { useRef, useCallback } from 'react';
 
 const TARGET_SAMPLE_RATE = 16000;
 
-// Converts a Float32 PCM buffer (any sample rate) down to 16kHz mono PCM16.
 function downsampleAndEncode(float32Buffer, inputSampleRate) {
   const ratio = inputSampleRate / TARGET_SAMPLE_RATE;
   const outputLength = Math.floor(float32Buffer.length / ratio);
