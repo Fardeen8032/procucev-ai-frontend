@@ -1,172 +1,395 @@
+
+/* ==============================
+   Global Styles
+================================= */
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #FFFFFF;
-  color: #000000;
+:root {
+  --bg: #0b0e14;
+  --surface: #121722;
+  --surface-hover: #192131;
+  --border: #252e3d;
+  --text: #edf2f7;
+  --muted: #8995a7;
+  --primary: #7c9cff;
+  --primary-hover: #94adff;
+  --danger: #f16b75;
+  --success: #46c994;
+  --radius: 12px;
 }
 
+body {
+  margin: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==============================
+   Header
+================================= */
+
 .app-header {
+  min-height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #262a33;
+  padding: 0 5%;
+  background: rgba(18, 23, 34, 0.85);
+  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.app-header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .app-header nav {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .app-header nav a {
-  color: #9aa4b2;
+  color: var(--muted);
   text-decoration: none;
   font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.app-header nav a:hover {
+  color: var(--text);
+  background: var(--surface-hover);
 }
 
 .app-header nav a.active {
-  color: #4f9cf9;
+  color: var(--primary);
+  background: rgba(124, 156, 255, 0.1);
 }
 
+/* ==============================
+   Main Layout
+================================= */
+
 .app-main {
-  max-width: 900px;
+  width: min(100% - 40px, 960px);
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 0;
+}
+
+.app-main h1,
+.app-main h2,
+.app-main h3 {
+  letter-spacing: -0.6px;
+}
+
+.app-main h2 {
+  font-size: 1.65rem;
+  margin-top: 0;
+  margin-bottom: 0.4rem;
 }
 
 .hint {
-  color: #9aa4b2;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
+
+/* ==============================
+   Controls
+================================= */
 
 .controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin: 1.8rem 0;
 }
 
 .btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: 1px solid #333;
-  background: #1a1d24;
-  color: #e6e8eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+  border-color: #43516a;
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .btn-sm {
-  padding: 0.3rem 0.7rem;
-  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.82rem;
   margin-right: 0.4rem;
 }
 
 .btn-primary {
-  background: #4f9cf9;
-  border-color: #4f9cf9;
-  color: #0b0c0f;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #101727;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
 }
 
 .btn-danger {
-  background: #e5484d;
-  border-color: #e5484d;
-  color: #0b0c0f;
+  background: rgba(241, 107, 117, 0.12);
+  border-color: rgba(241, 107, 117, 0.35);
+  color: var(--danger);
 }
 
+.btn-danger:hover {
+  background: rgba(241, 107, 117, 0.2);
+}
+
+/* ==============================
+   Recording Indicator
+================================= */
+
 .recording-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: #e5484d;
-  animation: pulse 1.2s infinite;
+  background: var(--danger);
+  box-shadow: 0 0 0 4px rgba(241, 107, 117, 0.12);
+  animation: pulse 1.4s infinite;
 }
 
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.3; }
-  100% { opacity: 1; }
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px rgba(241, 107, 117, 0.12);
+  }
+  50% {
+    opacity: 0.55;
+    box-shadow: 0 0 0 7px rgba(241, 107, 117, 0.04);
+  }
 }
 
+/* ==============================
+   Transcript Panel
+================================= */
+
 .transcript-panel {
-  margin-top: 1rem;
+  margin-top: 2rem;
+}
+
+.transcript-panel h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
 }
 
 .transcript-box {
-  min-height: 160px;
-  background: #171a21;
-  border: 1px solid #262a33;
-  border-radius: 10px;
-  padding: 1rem;
-  line-height: 1.6;
+  min-height: 220px;
+  padding: 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  line-height: 1.85;
+  font-size: 0.96rem;
+  transition: border-color 0.2s ease;
+}
+
+.transcript-box:focus-within {
+  border-color: rgba(124, 156, 255, 0.5);
 }
 
 .segment-final {
-  color: #e6e8eb;
+  color: var(--text);
 }
 
 .segment-partial {
-  color: #7c8699;
+  color: var(--muted);
   font-style: italic;
 }
 
 .placeholder {
-  color: #5c6472;
+  color: #647084;
+  font-size: 0.9rem;
 }
 
+/* ==============================
+   Alerts
+================================= */
+
 .alert {
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 9px;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
 }
 
 .alert-error {
-  background: #2a1517;
-  color: #ff8a8a;
-  border: 1px solid #4a1f22;
+  background: rgba(241, 107, 117, 0.08);
+  color: #ff929a;
+  border: 1px solid rgba(241, 107, 117, 0.2);
 }
 
 .alert-success {
-  background: #13261b;
-  color: #7ee2a8;
-  border: 1px solid #1f4a30;
+  background: rgba(70, 201, 148, 0.08);
+  color: #70ddb0;
+  border: 1px solid rgba(70, 201, 148, 0.2);
 }
+
+/* ==============================
+   Dashboard
+================================= */
 
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
+
+.dashboard-header h2 {
+  margin: 0;
+}
+
+/* ==============================
+   Table
+================================= */
 
 .transcription-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .transcription-table th,
 .transcription-table td {
   text-align: left;
-  padding: 0.6rem;
-  border-bottom: 1px solid #262a33;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
   vertical-align: top;
+  font-size: 0.88rem;
+}
+
+.transcription-table th {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  background: #151c29;
+}
+
+.transcription-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.transcription-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.transcription-table tbody tr:hover {
+  background: var(--surface-hover);
 }
 
 .text-cell {
   max-width: 400px;
+  min-width: 200px;
 }
 
 .text-cell textarea {
   width: 100%;
-  background: #0f1115;
-  color: #e6e8eb;
-  border: 1px solid #333;
-  border-radius: 6px;
+  min-height: 90px;
+  padding: 0.7rem;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.text-cell textarea:focus {
+  border-color: var(--primary);
 }
 
 .actions-cell {
   white-space: nowrap;
+}
+
+/* ==============================
+   Responsive
+================================= */
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .app-header nav {
+    gap: 0.2rem;
+  }
+
+  .app-header nav a {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  .app-main {
+    width: min(100% - 28px, 960px);
+    padding: 2rem 0;
+  }
+
+  .controls {
+    align-items: stretch;
+  }
+
+  .controls .btn {
+    flex: 1;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+  }
+
+  .transcription-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
