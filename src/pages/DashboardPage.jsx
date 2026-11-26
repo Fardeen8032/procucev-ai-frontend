@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { transcriptionsApi } from '../api/client.js';
+import { transcriptionsApi } from '../api/Api.js';
 
 export default function DashboardPage() {
   const [items, setItems] = useState([]);
